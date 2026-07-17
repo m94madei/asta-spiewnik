@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: red;
+    margin: 0;
+}
+
+
+header {
+    background: #111;
+    padding: 30px;
+    text-align: center;
+}
+
+
+main {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+
+.song {
+    color: white;
+    background: #222;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+
+.song h2 {
+    color: red;
+}
+
+
+pre {
+
+    font-family: inherit;
+    white-space: pre-wrap;
+    font-size: 18px;
+    line-height: 1.6;
+
+}
+button {
+
+    background: red;
+    color: white;
+
+    border: none;
+    padding: 10px 20px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+}
+
+
+button:hover {
+    opacity: 0.8;
+}
+
+
+.hidden {
+    display:none;
+}
