@@ -55,20 +55,20 @@ def get_songs(
 
     return songs
 
-@app.post("/songs", response_model=SongResponse)
-def create_song(
-    song: SongCreate,
-    db: Session = Depends(get_db)
-):
-
-    new_song = models.Song(
-        title=song.title,
-        lyrics=song.lyrics,
-	video_url=song.video_url
-    )
-
-    db.add(new_song)
-    db.commit()
-    db.refresh(new_song)
-
-    return new_song
+#@app.post("/songs", response_model=SongResponse)
+#def create_song(
+#    song: SongCreate,
+#    db: Session = Depends(get_db)
+#):
+#
+#    new_song = models.Song(
+#        title=song.title,
+#        lyrics=song.lyrics,
+#	video_url=song.video_url
+#    )
+#
+#    db.add(new_song)
+#    db.commit()
+#    db.refresh(new_song)
+#
+#    return new_song

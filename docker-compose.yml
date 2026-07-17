@@ -1,24 +1,38 @@
 services:
 
+  caddy:
+    image: caddy:2
+    container_name: asta-caddy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - frontend
+    restart: unless-stopped
+
   frontend:
     image: nginx:latest
     container_name: asta-frontend
-    ports:
-      - "8080:80"
+    expose:
+      - "80"
     volumes:
       - ./frontend:/usr/share/nginx/html:ro
       - ./frontend/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - backend
-
     restart: unless-stopped
 
   backend:
     build:
       context: ./backend
     container_name: asta-backend
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     restart: unless-stopped
 
   database:
@@ -32,6 +46,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
 
-
 volumes:
   postgres-data:
+  caddy-data:
+  caddy-config:

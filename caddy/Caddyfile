@@ -1,0 +1,3 @@
+astafans.site {
+    reverse_proxy frontend:80
+}
