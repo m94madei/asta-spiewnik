@@ -1,8 +1,10 @@
+import os
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 
-DATABASE_URL = "postgresql://asta:zmienimy_pozniej@database:5432/spiewnik"
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 
 engine = create_engine(DATABASE_URL)
@@ -13,6 +15,5 @@ SessionLocal = sessionmaker(
     autoflush=False,
     bind=engine
 )
-
 
 Base = declarative_base()
