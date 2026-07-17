@@ -1,65 +1,117 @@
-async function loadSongs() {
+let allSongs = [];
 
+function renderSongs(songs) {
+    const container = document.getElementById("songs");
+
+    container.innerHTML = "";
+
+    if (songs.length === 0) {
+        container.innerHTML = "<p>Nie znaleziono piosenek.</p>";
+        return;
+    }
+
+    songs.forEach(song => {
+        const article = document.createElement("article");
+
+        article.className = "song";
+
+        const videoButton = song.video_url
+            ? `
+                <button onclick="toggleVideo(this)">
+                    ▶ Pokaż film
+                </button>
+            `
+            : "";
+
+        const videoPlayer = song.video_url
+            ? `
+                <div class="video-container hidden">
+                    <video controls preload="metadata" class="song-video">
+                        <source src="${song.video_url}" type="video/mp4">
+                        Twoja przeglądarka nie obsługuje filmu.
+                    </video>
+                </div>
+            `
+            : "";
+
+        article.innerHTML = `
+            <h2>${song.title}</h2>
+
+            <div class="song-actions">
+                <button onclick="toggleSong(this)">
+                    Pokaż tekst
+                </button>
+
+                ${videoButton}
+            </div>
+
+            <pre class="lyrics hidden">${song.lyrics}</pre>
+
+            ${videoPlayer}
+        `;
+
+        container.appendChild(article);
+    });
+}
+
+async function loadSongs() {
     const container = document.getElementById("songs");
 
     try {
-
         const response = await fetch("/api/songs");
 
         if (!response.ok) {
             throw new Error("Błąd API");
         }
 
-        const songs = await response.json();
+        allSongs = await response.json();
 
-
-        container.innerHTML = "";
-
-
-        songs.forEach(song => {
-
-            const article = document.createElement("article");
-
-            article.className = "song";
-
-article.innerHTML = `
-    <h2>${song.title}</h2>
-
-    <button onclick="toggleSong(this)">
-        Pokaż tekst
-    </button>
-
-    <pre class="lyrics hidden">${song.lyrics}</pre>
-`;
-            container.appendChild(article);
-
-        });
-
-
+        renderSongs(allSongs);
     } catch (error) {
-
         container.innerHTML =
-            "<p>Nie udało się pobrać śpiewnika</p>";
+            "<p>Nie udało się pobrać śpiewnika.</p>";
 
         console.error(error);
-
     }
-
 }
 
-
-loadSongs();
-
 function toggleSong(button) {
-
-    const lyrics = button.nextElementSibling;
+    const article = button.closest(".song");
+    const lyrics = article.querySelector(".lyrics");
 
     lyrics.classList.toggle("hidden");
 
-    if (lyrics.classList.contains("hidden")) {
-        button.innerText = "Pokaż tekst";
-    } else {
-        button.innerText = "Ukryj tekst";
-    }
-
+    button.innerText = lyrics.classList.contains("hidden")
+        ? "Pokaż tekst"
+        : "Ukryj tekst";
 }
+
+function toggleVideo(button) {
+    const article = button.closest(".song");
+    const videoContainer = article.querySelector(".video-container");
+    const video = videoContainer.querySelector("video");
+
+    videoContainer.classList.toggle("hidden");
+
+    if (videoContainer.classList.contains("hidden")) {
+        button.innerText = "▶ Pokaż film";
+        video.pause();
+    } else {
+        button.innerText = "▼ Ukryj film";
+    }
+}
+
+const search = document.getElementById("search");
+
+search.addEventListener("input", function () {
+    const query = search.value.toLowerCase().trim();
+
+    const filteredSongs = allSongs.filter(song =>
+        song.title.toLowerCase().includes(query) ||
+        song.lyrics.toLowerCase().includes(query)
+    );
+
+    renderSongs(filteredSongs);
+});
+
+loadSongs();

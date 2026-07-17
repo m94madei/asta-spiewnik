@@ -7,18 +7,7 @@ class Song(Base):
 
     __tablename__ = "songs"
 
-    id = Column(
-        Integer,
-        primary_key=True,
-        index=True
-    )
-
-    title = Column(
-        String,
-        nullable=False
-    )
-
-    lyrics = Column(
-        Text,
-        nullable=False
-    )
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String, nullable=False)
+    lyrics = Column(Text, nullable=False)
+    video_url = Column(String, nullable=True)

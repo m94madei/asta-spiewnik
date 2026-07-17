@@ -21,19 +21,47 @@ main {
 
 
 .song {
-    color: white;
-    background: #222;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 28px;
     margin-bottom: 20px;
-    border-radius: 10px;
+
+    background: #222;
+    border-radius: 12px;
+}
+
+.song h2 {
+    margin: 0 0 20px;
+}
+
+.song-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    margin-bottom: 18px;
+}
+
+.song-actions button {
+    min-width: 130px;
+    padding: 12px 18px;
+}
+
+.video-container {
+    width: 100%;
+    margin-top: 20px;
     text-align: center;
 }
 
-
-.song h2 {
-    color: red;
+.song-video {
+    width: 100%;
+    max-width: 640px;
+    border-radius: 12px;
+    background: black;
 }
-
 
 pre {
 
@@ -45,8 +73,8 @@ pre {
 }
 button {
 
-    background: red;
-    color: white;
+    background: black;
+    color: red;
 
     border: none;
     padding: 10px 20px;
@@ -67,4 +95,43 @@ button:hover {
 
 .hidden {
     display:none;
+}
+#search {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+
+    margin: 0 auto 24px;
+    padding: 14px 18px;
+
+    background: #202020;
+    color: white;
+
+    border: 2px solid #333;
+    border-radius: 10px;
+
+    font-size: 16px;
+    outline: none;
+
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#search::placeholder {
+    color: #999;
+}
+
+#search:focus {
+    border-color: red;
+    box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.15);
+}
+
+.lyrics {
+    width: 100%;
+    margin: 10px 0 0;
+
+    text-align: center;
+    white-space: pre-wrap;
+    font-family: inherit;
+    line-height: 1.6;
 }

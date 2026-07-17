@@ -44,14 +44,14 @@ def root():
 
 
 
-@app.get("/songs")
+@app.get("/songs",response_model=list[SongResponse])
 def get_songs(
     db: Session = Depends(get_db)
 ):
 
     songs = db.query(
         models.Song
-    ).all()
+    ).order_by(models.Song.id.asc()).all()
 
     return songs
 
@@ -63,7 +63,8 @@ def create_song(
 
     new_song = models.Song(
         title=song.title,
-        lyrics=song.lyrics
+        lyrics=song.lyrics,
+	video_url=song.video_url
     )
 
     db.add(new_song)
