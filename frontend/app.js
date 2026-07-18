@@ -6,7 +6,7 @@ function renderSongs(songs) {
     container.innerHTML = "";
 
     if (songs.length === 0) {
-        container.innerHTML = "<p>Nie znaleziono piosenek.</p>";
+        container.innerHTML = "<p>Nie znaleziono przyśpiewek.</p>";
         return;
     }
 
@@ -102,8 +102,9 @@ function toggleVideo(button) {
 }
 
 const search = document.getElementById("search");
+const clearSearch = document.getElementById("clear-search");
 
-search.addEventListener("input", function () {
+function filterSongs() {
     const query = search.value.toLowerCase().trim();
 
     const filteredSongs = allSongs.filter(song =>
@@ -112,6 +113,16 @@ search.addEventListener("input", function () {
     );
 
     renderSongs(filteredSongs);
+
+    clearSearch.style.display = query ? "block" : "none";
+}
+
+search.addEventListener("input", filterSongs);
+
+clearSearch.addEventListener("click", () => {
+    search.value = "";
+    filterSongs();
+    search.focus();
 });
 
 loadSongs();

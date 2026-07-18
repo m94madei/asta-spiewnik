@@ -1,3 +1,7 @@
 astafans.site {
-    reverse_proxy frontend:80
+    reverse_proxy asta-frontend:80
+}
+
+dev.astafans.site {
+    reverse_proxy asta-dev-frontend:80
 }

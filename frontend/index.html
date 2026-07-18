@@ -5,27 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asta Fans Śpiewnik</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
+<link rel="icon" href="/favicon.png" type="image/png">
 </head>
 <body>
 
-    <header>
-        <h1>Asta Fans Śpiewnik</h1>
-    </header>
+<header class="hero">
+    <img
+        src="images/asta-fans-spiewnik.png"
+        alt="Asta Fans Śpiewnik"
+        class="hero-logo"
+    />
+</header>
 
     <main>
 
-        <input
-            type="text"
-            id="search"
-            placeholder="🔍 Szukaj przyśpiewki..."
-        >
+<div class="search-wrapper">
+    <input
+        type="text"
+        id="search"
+        placeholder="🔍 Szukaj przyśpiewki..."
+    >
 
+    <button
+        id="clear-search"
+        type="button"
+        aria-label="Wyczyść wyszukiwanie"
+    >
+        ×
+    </button>
+</div>
         <div id="songs"></div>
 
     </main>
 
-    <script src="app.js"></script>
+    <script src="app.js?v=2"></script>
 
 </body>
 </html>
