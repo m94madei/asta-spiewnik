@@ -6,3 +6,5 @@ Stack:
 -Nginx
 -FastAPI
 -PostgreSQL
+
+Check on: https//www.astafans.site
