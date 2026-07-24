@@ -7,4 +7,4 @@ Stack:
 -FastAPI
 -PostgreSQL
 
-Check on: https://www.astafans.site
+Check on: https://astafans.site/
